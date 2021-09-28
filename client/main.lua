@@ -4,7 +4,6 @@ local PlayerData = {}
 local training = false
 local resting = false
 local membership = false
-local show = 1
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
