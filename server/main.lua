@@ -44,7 +44,7 @@ RegisterServerEvent('qb-gym:buyMembership', function()
         TriggerClientEvent('QBCore:Notify', src, 'You have paid for a gym membership', 'success', 3000)
 		TriggerClientEvent('qb-gym:trueMembership', src) -- true
 	else
-        TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough money', 'error', 3000)
+        TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough money, you need '.. Config.MmbershipCardPrice, 'error', 3000)
 
 	end	
 end)
