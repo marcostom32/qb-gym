@@ -1,16 +1,16 @@
 
 Config = {}
 
-Config.UpdateFrequency = 3600 -- Segundos que pasan para borrar un stat. (Por defecto 1 hora)
-Config.DeleteStats = true -- True = borramos un poco de las stats cada vez que el tiempo especificado (Config.UpdateFrequency) pase.
+Config.UpdateFrequency = 3600 
+Config.DeleteStats = true 
 
 Config.MmbershipCardPrice = 200
 
 Config.Skills = {
-    ["resistance"] = { -- Nombre del skill
-        ["Current"] = 20, -- Valor por defecto
-        ["RemoveAmount"] = -0.3, -- % a remover en caso de que Config.DeleteStats sea = true
-        ["Stat"] = "MP0_STAMINA" -- Nombre del stat (nativo)
+    ["resistance"] = { 
+        ["Current"] = 20, 
+        ["RemoveAmount"] = -0.3, 
+        ["Stat"] = "MP0_STAMINA" 
     },
 
     ["strength"] = {
@@ -22,8 +22,7 @@ Config.Skills = {
     },
 
     ["shooting"] = {
-        ["Current"] = 0, ["RemoveAmount"] = -0.1,
-        ["Stat"] = "MP0_SHOOTING_ABILITY"
+        ["Current"] = 0, ["RemoveAmount"] = -0.1,["Stat"] = "MP0_SHOOTING_ABILITY"
     },
 
     ["driving"] = {
