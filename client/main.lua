@@ -42,7 +42,7 @@ function RefreshSkills()
     end
 end
 
-local function FetchSkills()
+function FetchSkills()
     QBCore.Functions.TriggerCallback("qb-skills:fetchStatus", function(data)
 		if data then
             for status, value in pairs(data) do
