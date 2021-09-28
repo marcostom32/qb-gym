@@ -5,6 +5,9 @@
 idle 0.00-0.01 // max 0.04 with 3drawtxt
 
 
+## ADD TO SHARED.LUA
+```['gym_membership'] 					 = {['name'] = 'gym_membership', 			 	  	  	['label'] = 'Gym membership', 						['weight'] = 0, 		['type'] = 'item', 		['image'] = 'gym_membership.png', 				['unique'] = true, 		['useable'] = true, 	['shouldClose'] = false,   ['combinable'] = nil,   ['description'] = 'Carnet del gym fachero'},
+```
 ## Screenshots
 ![Check Status](https://imgur.com/mWb93QG.png)
 
