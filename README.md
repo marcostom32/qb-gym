@@ -1,5 +1,7 @@
 # qb-gym
  gym and skill system to for qbcore
+IDLE 0.00-0.01
+
 
 ## Screenshots
 ![Check Status](https://imgur.com/mWb93QG.png)
