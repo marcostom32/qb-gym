@@ -1,6 +1,8 @@
 # qb-gym
  gym and skill system to for qbcore
-IDLE 0.00-0.01
+
+## Resmon
+idle 0.00-0.01 // max 0.04 with 3drawtxt
 
 
 ## Screenshots
