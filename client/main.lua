@@ -58,6 +58,40 @@ local function FetchSkills()
 end
 
 
+function UpdateSkill(skill, amount)
+
+    if not Config.Skills[skill] then
+        print("Skill " .. skill .. " doesn't exist")
+        return
+    end
+    local SkillAmount = Config.Skills[skill]["Current"]
+    if SkillAmount + tonumber(amount) < 0 then
+        Config.Skills[skill]["Current"] = 0
+    elseif SkillAmount + tonumber(amount) > 100 then
+        Config.Skills[skill]["Current"] = 100
+    else
+        Config.Skills[skill]["Current"] = SkillAmount + tonumber(amount)
+    end
+    RefreshSkills()
+    if tonumber(amount) > 0 then
+        QBCore.Functions.Notify('~g~+' .. amount .. '% ~s~' .. skill, 'success')
+    end
+	TriggerServerEvent("qb-skills:update", json.encode(Config.Skills))
+end
+
+local function CheckTraining()
+	if resting == true then
+        QBCore.Functions.Notify('You\'re resting', 'primary')
+		resting = false
+		Wait(60000)
+		training = false
+	end
+	if resting == false then
+        QBCore.Functions.Notify('You can now do exercise again', 'success')
+	end
+end
+
+
 function SkillMenu2()
 	ped = PlayerPedId();
 	MenuTitle = "Skills"
@@ -80,10 +114,6 @@ function BuyMembership()
     Menu.addButton('Buy Membership', "buyMember",nil)
 end
 
-RegisterCommand('habilidades', function() 
-	SkillMenu2()
-end, false)
-
 
 Menu = {}
 Menu.GUI = {}
@@ -92,7 +122,7 @@ Menu.selection = 0
 Menu.hidden = true
 MenuTitle = "Menu"
 
-function Menu.addButton(name, func,args,extra,damages,bodydamages,fuel)
+function Menu.addButton(name, func,args)
 
 	local yoffset = 0.25
 	local xoffset = 0.3
@@ -101,14 +131,6 @@ function Menu.addButton(name, func,args,extra,damages,bodydamages,fuel)
 	local ymin = 0.03
 	local ymax = 0.03
 	Menu.GUI[Menu.buttonCount+1] = {}
-	if extra ~= nil then
-		Menu.GUI[Menu.buttonCount+1]["extra"] = extra
-	end
-	if damages ~= nil then
-		Menu.GUI[Menu.buttonCount+1]["damages"] = damages
-		Menu.GUI[Menu.buttonCount+1]["bodydamages"] = bodydamages
-		Menu.GUI[Menu.buttonCount+1]["fuel"] = fuel
-	end
 
 
 	Menu.GUI[Menu.buttonCount+1]["name"] = name
@@ -177,12 +199,6 @@ function Menu.renderButtons()
 		
 		boxColor = {38,38,38,199}
 		local movetext = 0.0
-		if(settings["extra"] == "Garage") then
-			boxColor = {44,100,44,200}
-		elseif (settings["extra"] == "Impounded") then
-			boxColor = {77, 8, 8,155}
-		end
-
 		if(settings["active"]) then
 			boxColor = {31, 116, 207,155}
 		end
@@ -197,37 +213,6 @@ function Menu.renderButtons()
 			SetTextEntry("STRING") 
 			AddTextComponentString(settings["name"])
 			DrawText(0.63, (settings["ymin"] - 0.012 )) 
-
-			SetTextFont(4)
-			SetTextScale(0.26, 0.26)
-			SetTextColour(255, 255, 255, 255)
-			SetTextEntry("STRING") 
-			AddTextComponentString(settings["extra"])
-			DrawText(0.730 + movetext, (settings["ymin"] - 0.011 )) 
-
-
-			SetTextFont(4)
-			SetTextScale(0.28, 0.28)
-			SetTextColour(11, 11, 11, 255)
-			SetTextEntry("STRING") 
-			AddTextComponentString(settings["damages"])
-			DrawText(0.778, (settings["ymin"] - 0.012 )) 
-
-			SetTextFont(4)
-			SetTextScale(0.28, 0.28)
-			SetTextColour(11, 11, 11, 255)
-			SetTextEntry("STRING") 
-			AddTextComponentString(settings["bodydamages"])
-			DrawText(0.815, (settings["ymin"] - 0.012 ))  
-
-			SetTextFont(4)
-			SetTextScale(0.28, 0.28)
-			SetTextColour(11, 11, 11, 255)
-			SetTextEntry("STRING") 
-			AddTextComponentString(settings["fuel"])
-			DrawText(0.854, (settings["ymin"] - 0.012 )) 
-
-			
 
 			DrawRect(0.832, settings["ymin"], 0.11, settings["ymax"]-0.002, 255,255,255,199)
 			--Global.DrawRect(x, y, width, height, r, g, b, a)
