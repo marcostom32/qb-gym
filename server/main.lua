@@ -5,7 +5,7 @@ QBCore.Functions.CreateCallback("qb-skills:fetchStatus", function(source, cb)
      local src = source
      local Player = QBCore.Functions.GetPlayer(src)
 
-    exports.oxmysql.scalar('SELECT skills FROM users WHERE citizenid = ?', { Player.PlayerData.citizenid }, function(status)
+    exports.oxmysql.scalar('SELECT skills FROM players WHERE citizenid = ?', { Player.PlayerData.citizenid }, function(status)
           if status then
                cb(json.decode(status))
           else
